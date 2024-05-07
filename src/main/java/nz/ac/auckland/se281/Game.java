@@ -22,7 +22,9 @@ public class Game {
 
     String input = Utils.scanner.nextLine();
 
-    
+    if ((Integer.parseInt(input) < 0) || (Integer.parseInt(input) > 5)) {
+      MessageCli.INVALID_INPUT.printMessage();
+    }
 
   }
 
