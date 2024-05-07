@@ -9,11 +9,25 @@ public class Game {
   private String playerName;
   private boolean gameStarted = false;
   private int rounds = 1;
+  private Difficulty currentDifficulty;
 
+  // public void game() {
+  //   this.difficulty = difficulty;
+  // }
+
+  /**
+   * Starts a new game with the given difficulty, choice, and options.
+   *
+   * @param difficulty level of difficulty EASY, MEDIUM, HARD
+   * @param choice odd or even
+   * @param options name of the player
+   */
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
     gameStarted = true;
     rounds = 1;
+    currentDifficulty = difficulty;
+    
 
     if (difficulty != Difficulty.EASY
         && difficulty != Difficulty.MEDIUM
@@ -29,6 +43,7 @@ public class Game {
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
   }
 
+  /** Plays a round of the game if the new game is created. */
   public void play() {
     if (!gameStarted) {
       MessageCli.GAME_NOT_STARTED.printMessage();
@@ -60,7 +75,14 @@ public class Game {
       }
     }
 
+    int ai = new AIFactory().createAI(currentDifficulty);
+
+    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", String.valueOf(ai));
+
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
+
+    // MessageCli.PRINT_OUTCOME_ROUND.printMessage();
+
   }
 
   public void endGame() {}
