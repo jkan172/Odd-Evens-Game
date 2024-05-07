@@ -13,6 +13,7 @@ public class Game {
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
     gameStarted = true;
+    rounds = 1;
 
     if (difficulty != Difficulty.EASY
         && difficulty != Difficulty.MEDIUM
@@ -44,7 +45,7 @@ public class Game {
     int intInput = Integer.parseInt(input);
 
     if ((intInput < 0) || intInput > 5) {
-      
+
       while (!validInput) {
         MessageCli.INVALID_INPUT.printMessage();
 
