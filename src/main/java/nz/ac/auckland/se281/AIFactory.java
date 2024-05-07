@@ -6,11 +6,13 @@ public class AIFactory {
   public int createAI(Difficulty difficulty) {
     switch (difficulty) {
       case EASY:
-      AI easy = new Easy();
-      int number = easy.play();
-        return number;
+        AI easy = new Easy();
+        int easyNumber = easy.play();
+        return easyNumber;
       case MEDIUM:
-        return 0;
+        AI medium = new Medium();
+        int mediumNumber = medium.play();
+        return mediumNumber;
       case HARD:
         return 0;
       default:
