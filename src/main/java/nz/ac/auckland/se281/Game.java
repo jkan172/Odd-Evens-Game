@@ -11,6 +11,7 @@ public class Game {
   private int rounds = 1;
   private Difficulty currentDifficulty;
   private Choice currentChoice;
+  private int currentInput;
 
   /**
    * Starts a new game with the given difficulty, choice, and options.
@@ -67,9 +68,11 @@ public class Game {
 
         if ((intInput >= 0) && (intInput <= 5)) {
           validInput = true;
+
           break;
         }
       }
+      currentInput = intInput;
     }
 
     int ai = new AIFactory().createAI(currentDifficulty);
@@ -93,6 +96,18 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", "HAL-9000");
       }
     }
+  }
+
+  public Choice getCurrentChoice() {
+    return this.currentChoice;
+  }
+
+  public int getCurrentInput() {
+    return this.currentInput;
+  }
+
+  public int getCurrentRound() {
+    return this.rounds;
   }
 
   public void endGame() {}
