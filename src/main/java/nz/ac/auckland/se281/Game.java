@@ -18,6 +18,12 @@ public class Game {
     MessageCli.START_ROUND.printMessage(String.valueOf(rounds));
     rounds++;
 
+    MessageCli.ASK_INPUT.printMessage();
+
+    String input = Utils.scanner.nextLine();
+
+    
+
   }
 
   public void endGame() {}
