@@ -10,10 +10,7 @@ public class Game {
   private boolean gameStarted = false;
   private int rounds = 1;
   private Difficulty currentDifficulty;
-
-  // public void game() {
-  //   this.difficulty = difficulty;
-  // }
+  private Choice currentChoice;
 
   /**
    * Starts a new game with the given difficulty, choice, and options.
@@ -27,7 +24,7 @@ public class Game {
     gameStarted = true;
     rounds = 1;
     currentDifficulty = difficulty;
-    
+    currentChoice = choice;
 
     if (difficulty != Difficulty.EASY
         && difficulty != Difficulty.MEDIUM
@@ -81,8 +78,21 @@ public class Game {
 
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
-    // MessageCli.PRINT_OUTCOME_ROUND.printMessage();
+    int sum = ai + Integer.parseInt(input);
 
+    if (currentChoice == Choice.EVEN) {
+      if (Utils.isEven(sum)) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", "HAL-9000");
+      }
+    } else {
+      if (Utils.isOdd(sum)) {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
+      } else {
+        MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", "HAL-9000");
+      }
+    }
   }
 
   public void endGame() {}
