@@ -58,7 +58,7 @@ public class Game {
     int intInput = Integer.parseInt(input);
 
     if ((intInput < 0) || intInput > 5) {
-
+      currentInput = intInput;
       while (!validInput) {
         MessageCli.INVALID_INPUT.printMessage();
 
@@ -72,7 +72,7 @@ public class Game {
           break;
         }
       }
-      currentInput = intInput;
+      
     }
 
     int ai = new AIFactory().createAI(currentDifficulty);
