@@ -6,9 +6,12 @@ import nz.ac.auckland.se281.Main.Difficulty;
 /** This class represents the Game is the main entry point. */
 public class Game {
 
+  String playerName;
+
   public void newGame(Difficulty difficulty, Choice choice, String[] options) {
     // the first element of options[0]; is the name of the player
-    MessageCli.WELCOME_PLAYER.printMessage(options[0]);
+    playerName = options[0];
+    MessageCli.WELCOME_PLAYER.printMessage(playerName);
 
 
   }
@@ -25,6 +28,8 @@ public class Game {
     if ((Integer.parseInt(input) < 0) || (Integer.parseInt(input) > 5)) {
       MessageCli.INVALID_INPUT.printMessage();
     }
+
+    MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
   }
 
