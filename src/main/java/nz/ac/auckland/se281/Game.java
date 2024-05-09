@@ -11,8 +11,9 @@ public class Game {
   private int rounds;
   private Difficulty currentDifficulty;
   private Choice currentChoice;
-  private int currentInput = -1;
   private AI ai = null;
+  private int oddCount = 0;
+  private int evenCount = 0;
 
   /**
    * Starts a new game with the given difficulty, choice, and options.
@@ -50,14 +51,12 @@ public class Game {
     }
 
     MessageCli.START_ROUND.printMessage(String.valueOf(rounds));
-    rounds++;
 
     MessageCli.ASK_INPUT.printMessage();
     String input = Utils.scanner.nextLine();
 
     boolean validInput = false;
     int intInput = Integer.parseInt(input);
-    
 
     if ((intInput < 0) || intInput > 5) {
       // currentInput = intInput;
@@ -75,10 +74,16 @@ public class Game {
         }
       }
     }
-    
 
-    ai = AIFactory.createAI(currentDifficulty, rounds);
-    int aiNumber = ai.play(rounds);
+    if (Utils.isOdd(intInput)) {
+      oddCount++;
+    } else if (Utils.isEven(intInput)) {
+      evenCount++;
+    }
+
+    ai = AIFactory.createAI(currentDifficulty);
+    int aiNumber = ai.play(rounds, currentChoice.toString(), oddCount, evenCount);
+    rounds++;
 
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", String.valueOf(aiNumber));
 
@@ -101,14 +106,13 @@ public class Game {
     }
   }
 
-  public Choice getCurrentChoice() {
-    return this.currentChoice;
-  }
+  // public Choice getCurrentChoice() {
+  //   return this.currentChoice;
+  // }
 
-  public int getCurrentInput() {
-    return this.currentInput;
-  }
-
+  // public int getCurrentInput() {
+  //   return this.currentInput;
+  // }
 
   public void endGame() {}
 

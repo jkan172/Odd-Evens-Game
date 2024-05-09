@@ -10,7 +10,7 @@ public class Hard implements AI {
 	}
 
   @Override
-  public int play(int currentRound) {
+  public int play(int currentRound, String choice, int oddCount, int evenCount) {	
     return 0;
   }
 }

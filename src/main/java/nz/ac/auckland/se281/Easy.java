@@ -10,13 +10,13 @@ public class Easy implements AI {
 	}
 
   @Override
-  public int play(int currentRound) {
+  public int play(int currentRound, String choice, int oddCount, int evenCount) {
     // create a random number = number
 
     // messageCli.PRINT_INFO_HAND.printMessage();
 
     RandomStrategy randomStrategy = new RandomStrategy();
-    int num = randomStrategy.getStrategy();
+    int num = randomStrategy.getStrategy(choice, 0, 0);
     return num;
   }
 }
