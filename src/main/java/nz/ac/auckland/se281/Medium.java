@@ -20,17 +20,6 @@ public class Medium implements AI {
   @Override
   public int play(int currentRound, String choice, int oddCount, int evenCount) {
 
-    // Game game = new Game();
-    // int currentNumber = game.getCurrentInput();
-
-    // int oddCount;
-    // int evenCount;
-    // if (Utils.isOdd(currentNumber)) {
-    //   oddCount++;
-    // } else if (Utils.isEven(currentNumber)) {
-    //   evenCount++;
-    // }
-
     int num;
     if (currentRound < 4) {
       num = randomStrategy.getStrategy(choice, oddCount, evenCount);
@@ -41,5 +30,15 @@ public class Medium implements AI {
     }
 
     return num;
+  }
+
+  @Override
+  public Strategy changeStrategy() {
+    // if (strategy instanceof TopStrategy)
+    //   return new RandomStrategy();
+    // else if (strategy instanceof RandomStrategy)
+    //   return new TopStrategy();
+    // else
+      return null;
   }
 }
