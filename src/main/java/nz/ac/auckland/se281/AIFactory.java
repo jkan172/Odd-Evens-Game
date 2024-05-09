@@ -8,10 +8,9 @@ public class AIFactory {
       case EASY:
         return new Easy();
       case MEDIUM:
-
         return new Medium();
       case HARD:
-        return null;
+        return new Hard();
       default:
         MessageCli.INVALID_DIFFICULTY.printMessage();
         System.exit(0);
