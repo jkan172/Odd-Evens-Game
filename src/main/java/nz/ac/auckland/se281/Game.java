@@ -116,7 +116,14 @@ public class Game {
   }
 
   public void endGame() {
-    
+    if (!gameStarted) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+   
+
+    gameStarted = false;
   }
 
   public void showStats() {
@@ -124,6 +131,8 @@ public class Game {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+
+    
 
   }
 }
