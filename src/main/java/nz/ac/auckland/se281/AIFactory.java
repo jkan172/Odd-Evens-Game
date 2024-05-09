@@ -3,22 +3,19 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class AIFactory {
-  public int createAI(Difficulty difficulty) {
+  public static AI createAI(Difficulty difficulty, int currentRound ) {
     switch (difficulty) {
       case EASY:
-        AI easy = new Easy();
-        int easyNumber = easy.play();
-        return easyNumber;
+        return new Easy();
       case MEDIUM:
-        AI medium = new Medium();
-        int mediumNumber = medium.play();
-        return mediumNumber;
+
+        return new Medium();
       case HARD:
-        return 0;
+        return null;
       default:
         MessageCli.INVALID_DIFFICULTY.printMessage();
         System.exit(0);
-        return 0;
+        return null;
     }
   }
 }
