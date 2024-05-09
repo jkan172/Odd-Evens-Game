@@ -15,6 +15,8 @@ public class Game {
   private int oddCount = 0;
   private int evenCount = 0;
   private Strategy otherStrategy = null;
+  private int playerWin = 0;
+  private int aiWin = 0;
 
   /**
    * Starts a new game with the given difficulty, choice, and options.
@@ -99,8 +101,11 @@ public class Game {
         //   otherStrategy = ai.changeStrategy();
         //   ai.setStrategy(otherStrategy);
         // }
+          playerWin++;
+
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", "HAL-9000");
+        aiWin++;
       }
     } else {
       if (Utils.isOdd(sum)) {
@@ -109,8 +114,11 @@ public class Game {
         //   otherStrategy = ai.changeStrategy();
         //   ai.setStrategy(otherStrategy);
         // }
+        playerWin++;
+
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", "HAL-9000");
+        aiWin++;
       }
     }
   }
@@ -120,6 +128,7 @@ public class Game {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+
 
    
 
@@ -132,7 +141,8 @@ public class Game {
       return;
     }
 
-    
+    MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, String.valueOf(playerWin), String.valueOf(aiWin));
+    MessageCli.PRINT_PLAYER_WINS.printMessage("HAL-9000", String.valueOf(aiWin), String.valueOf(playerWin));
 
   }
 }
