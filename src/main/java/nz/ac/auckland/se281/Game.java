@@ -8,10 +8,11 @@ public class Game {
 
   private String playerName;
   private boolean gameStarted = false;
-  private int rounds = 1;
+  private int rounds;
   private Difficulty currentDifficulty;
   private Choice currentChoice;
-  private int currentInput;
+  private int currentInput = -1;
+  private AI ai = null;
 
   /**
    * Starts a new game with the given difficulty, choice, and options.
@@ -24,7 +25,7 @@ public class Game {
     // the first element of options[0]; is the name of the player
     gameStarted = true;
     rounds = 1;
-    currentDifficulty = difficulty;
+    this.currentDifficulty = difficulty;
     currentChoice = choice;
 
     if (difficulty != Difficulty.EASY
@@ -56,9 +57,10 @@ public class Game {
 
     boolean validInput = false;
     int intInput = Integer.parseInt(input);
+    
 
     if ((intInput < 0) || intInput > 5) {
-      currentInput = intInput;
+      // currentInput = intInput;
       while (!validInput) {
         MessageCli.INVALID_INPUT.printMessage();
 
@@ -72,16 +74,17 @@ public class Game {
           break;
         }
       }
-      
     }
+    
 
-    int ai = new AIFactory().createAI(currentDifficulty);
+    ai = AIFactory.createAI(currentDifficulty, rounds);
+    int aiNumber = ai.play(rounds);
 
-    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", String.valueOf(ai));
+    MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", String.valueOf(aiNumber));
 
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
-    int sum = ai + Integer.parseInt(input);
+    int sum = aiNumber + Integer.parseInt(input);
 
     if (currentChoice == Choice.EVEN) {
       if (Utils.isEven(sum)) {
@@ -106,9 +109,6 @@ public class Game {
     return this.currentInput;
   }
 
-  public int getCurrentRound() {
-    return this.rounds;
-  }
 
   public void endGame() {}
 

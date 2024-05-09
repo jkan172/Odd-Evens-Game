@@ -3,43 +3,40 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Choice;
 
 public class TopStrategy implements Strategy {
-  private int oddCount;
-  private int evenCount;
 
   @Override
-  public int setStrategy() {
+  public int getStrategy() {
 
     Game game = new Game();
-    if (game.getCurrentChoice() == Choice.ODD) {
+    // int currentNumber = game.getCurrentInput();
+    Choice currentChoice = game.getCurrentChoice();
+    int randomEvenNumber = Utils.getRandomEvenNumber();
+    int randomOddNumber = Utils.getRandomOddNumber();
+    Medium medium = new Medium();
+    int getOddCount = medium.getOddCount();
+    int getEvenCount = medium.getEvenCount();
+    int newRandomNumber = Utils.getRandomNumberRange(0, 5);
 
-      if (Utils.isOdd(game.getCurrentInput())) {
-        oddCount++;
+    boolean playerPrefersOdd = getOddCount > getEvenCount;
+    boolean playerPrefersEven = getEvenCount > getOddCount;
+
+    if (currentChoice == Main.Choice.ODD) {
+
+      if (playerPrefersOdd) {
+        return randomOddNumber;
       } else {
-        evenCount++;
+        return randomEvenNumber;
       }
 
-      if (oddCount > evenCount) {
-        return Utils.getRandomOddNumber();
-      } else if (evenCount > oddCount) {
-        return Utils.getRandomEvenNumber();
-      } else {
-        return Utils.getRandomNumberRange(0, 5);
-      }
-    } else {
+    } else if (currentChoice == Main.Choice.EVEN) {
 
-      if (Utils.isEven(game.getCurrentInput())) {
-        evenCount++;
+      if (playerPrefersOdd) {
+        return randomEvenNumber;
       } else {
-        oddCount++;
-      }
-
-      if (evenCount > oddCount) {
-        return Utils.getRandomOddNumber();
-      } else if (oddCount > evenCount) {
-        return Utils.getRandomEvenNumber();
-      } else {
-        return Utils.getRandomNumberRange(0, 5);
+        return randomOddNumber;
       }
     }
+
+    return newRandomNumber;
   }
 }
