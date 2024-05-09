@@ -14,6 +14,7 @@ public class Game {
   private AI ai = null;
   private int oddCount = 0;
   private int evenCount = 0;
+  private Strategy otherStrategy = null;
 
   /**
    * Starts a new game with the given difficulty, choice, and options.
@@ -89,29 +90,40 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
     int sum = aiNumber + Integer.parseInt(input);
+    
 
     if (currentChoice == Choice.EVEN) {
       if (Utils.isEven(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
-        if (currentDifficulty == Difficulty.HARD) {
-          ai.changeStrategy();
-        }
+        // if (currentDifficulty == Difficulty.HARD) {
+        //   otherStrategy = ai.changeStrategy();
+        //   ai.setStrategy(otherStrategy);
+        // }
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", "HAL-9000");
       }
     } else {
       if (Utils.isOdd(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
-        if (currentDifficulty == Difficulty.HARD) {
-          ai.changeStrategy();
-        }
+        // if (currentDifficulty == Difficulty.HARD) {
+        //   otherStrategy = ai.changeStrategy();
+        //   ai.setStrategy(otherStrategy);
+        // }
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", "HAL-9000");
       }
     }
   }
 
-  public void endGame() {}
+  public void endGame() {
+    
+  }
 
-  public void showStats() {}
+  public void showStats() {
+    if(!gameStarted) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+      return;
+    }
+
+  }
 }

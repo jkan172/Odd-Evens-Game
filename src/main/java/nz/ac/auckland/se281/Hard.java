@@ -19,7 +19,7 @@ public class Hard implements AI {
   @Override
   public int play(int currentRound, String choice, int oddCount, int evenCount) {
     int num;
-    if (currentRound < 4) {
+    if (currentRound < 4 || strategy == randomStrategy) {
       num = randomStrategy.getStrategy(choice, oddCount, evenCount);
 
     } else {
@@ -32,12 +32,12 @@ public class Hard implements AI {
 
   @Override
   public Strategy changeStrategy() {
-    if (strategy instanceof TopStrategy) {
-      return new RandomStrategy();
-    } else if (strategy instanceof RandomStrategy) {
-      return new TopStrategy();
-    } else
-      return null;
+    // if (strategy instanceof TopStrategy) {
+    //   return new RandomStrategy();
+
+    // } else
+    //   return null;
+    return randomStrategy;
   
   }
 }
