@@ -59,7 +59,6 @@ public class Game {
     int intInput = Integer.parseInt(input);
 
     if ((intInput < 0) || intInput > 5) {
-      // currentInput = intInput;
       while (!validInput) {
         MessageCli.INVALID_INPUT.printMessage();
 
@@ -94,25 +93,23 @@ public class Game {
     if (currentChoice == Choice.EVEN) {
       if (Utils.isEven(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
+        if (currentDifficulty == Difficulty.HARD) {
+          ai.changeStrategy();
+        }
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", "HAL-9000");
       }
     } else {
       if (Utils.isOdd(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
+        if (currentDifficulty == Difficulty.HARD) {
+          ai.changeStrategy();
+        }
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", "HAL-9000");
       }
     }
   }
-
-  // public Choice getCurrentChoice() {
-  //   return this.currentChoice;
-  // }
-
-  // public int getCurrentInput() {
-  //   return this.currentInput;
-  // }
 
   public void endGame() {}
 
