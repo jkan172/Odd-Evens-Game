@@ -92,7 +92,6 @@ public class Game {
     MessageCli.PRINT_INFO_HAND.printMessage(playerName, input);
 
     int sum = aiNumber + Integer.parseInt(input);
-    
 
     if (currentChoice == Choice.EVEN) {
       if (Utils.isEven(sum)) {
@@ -101,7 +100,7 @@ public class Game {
         //   otherStrategy = ai.changeStrategy();
         //   ai.setStrategy(otherStrategy);
         // }
-          playerWin++;
+        playerWin++;
 
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", "HAL-9000");
@@ -129,20 +128,26 @@ public class Game {
       return;
     }
 
-
-   
+    if (playerWin > aiWin) {
+      MessageCli.PRINT_END_GAME.printMessage(playerName);
+    } else if (playerWin < aiWin) {
+      MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
+    } else {
+      MessageCli.PRINT_END_GAME_TIE.printMessage();
+    }
 
     gameStarted = false;
   }
 
   public void showStats() {
-    if(!gameStarted) {
+    if (!gameStarted) {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
 
-    MessageCli.PRINT_PLAYER_WINS.printMessage(playerName, String.valueOf(playerWin), String.valueOf(aiWin));
-    MessageCli.PRINT_PLAYER_WINS.printMessage("HAL-9000", String.valueOf(aiWin), String.valueOf(playerWin));
-
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        playerName, String.valueOf(playerWin), String.valueOf(aiWin));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        "HAL-9000", String.valueOf(aiWin), String.valueOf(playerWin));
   }
 }
