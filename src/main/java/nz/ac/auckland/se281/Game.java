@@ -17,6 +17,7 @@ public class Game {
   private Strategy otherStrategy = null;
   private int playerWin = 0;
   private int aiWin = 0;
+
   private int intInput = -1;
 
   /**
@@ -58,37 +59,28 @@ public class Game {
 
     MessageCli.ASK_INPUT.printMessage();
     String input = Utils.scanner.nextLine();
-
     String[] inputArray = input.split(" ");
-
-    if (inputArray.length > 1) {
-      MessageCli.INVALID_INPUT.printMessage();
-      return;
-    }
-
     boolean validInput = false;
 
-    try {
-      Integer.parseInt(input);
-    } catch (NumberFormatException e) {
-      MessageCli.INVALID_INPUT.printMessage();
-      return;
-    }
-    // int intInput = Integer.parseInt(input);
+    while (!validInput) {
+      boolean multipleInput = inputArray.length > 1;
+      boolean isInteger = Utils.isInteger(input);
+      intInput = -1;
 
-    if ((intInput < 0) || intInput > 5) {
-      while (!validInput) {
+      if (!multipleInput) {
+        try {
+          intInput = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+          isInteger = false;
+        }
+      }
+      if (intInput < 0 || intInput > 5 || multipleInput || !isInteger) {
         MessageCli.INVALID_INPUT.printMessage();
-
         MessageCli.ASK_INPUT.printMessage();
         input = Utils.scanner.nextLine();
-        intInput = Integer.parseInt(input);
-
-        if ((intInput >= 0) && (intInput <= 5)) {
-          validInput = true;
-
-          break;
-        }
+        inputArray = input.split(" ");
+      } else {
+        validInput = true;
       }
     }
 
