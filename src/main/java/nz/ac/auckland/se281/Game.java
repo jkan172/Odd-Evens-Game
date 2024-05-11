@@ -17,6 +17,7 @@ public class Game {
   private Strategy otherStrategy = null;
   private int playerWin = 0;
   private int aiWin = 0;
+  private int intInput = -1;
 
   /**
    * Starts a new game with the given difficulty, choice, and options.
@@ -58,8 +59,22 @@ public class Game {
     MessageCli.ASK_INPUT.printMessage();
     String input = Utils.scanner.nextLine();
 
+    String[] inputArray = input.split(" ");
+
+    if (inputArray.length > 1) {
+      MessageCli.INVALID_INPUT.printMessage();
+      return;
+    }
+
     boolean validInput = false;
-    int intInput = Integer.parseInt(input);
+
+    try {
+      Integer.parseInt(input);
+    } catch (NumberFormatException e) {
+      MessageCli.INVALID_INPUT.printMessage();
+      return;
+    }
+    // int intInput = Integer.parseInt(input);
 
     if ((intInput < 0) || intInput > 5) {
       while (!validInput) {
@@ -96,10 +111,10 @@ public class Game {
     if (currentChoice == Choice.EVEN) {
       if (Utils.isEven(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
-        // if (currentDifficulty == Difficulty.HARD) {
-        //   otherStrategy = ai.changeStrategy();
-        //   ai.setStrategy(otherStrategy);
-        // }
+        if (currentDifficulty == Difficulty.HARD) {
+          otherStrategy = ai.changeStrategy();
+          ai.setStrategy(otherStrategy);
+        }
         playerWin++;
 
       } else {
@@ -109,10 +124,10 @@ public class Game {
     } else {
       if (Utils.isOdd(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
-        // if (currentDifficulty == Difficulty.HARD) {
-        //   otherStrategy = ai.changeStrategy();
-        //   ai.setStrategy(otherStrategy);
-        // }
+        if (currentDifficulty == Difficulty.HARD) {
+          otherStrategy = ai.changeStrategy();
+          ai.setStrategy(otherStrategy);
+        }
         playerWin++;
 
       } else {
@@ -122,6 +137,7 @@ public class Game {
     }
   }
 
+  /** Ends the game and prints the winner of the game. */
   public void endGame() {
     if (!gameStarted) {
       MessageCli.GAME_NOT_STARTED.printMessage();
@@ -139,6 +155,7 @@ public class Game {
     gameStarted = false;
   }
 
+  /** Shows the statistics of the game. */
   public void showStats() {
     if (!gameStarted) {
       MessageCli.GAME_NOT_STARTED.printMessage();
