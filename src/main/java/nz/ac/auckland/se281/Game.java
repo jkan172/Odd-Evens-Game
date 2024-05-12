@@ -89,17 +89,17 @@ public class Game {
       }
     }
 
+    // creates an instance of an AI
+    ai = Factory.createAi(currentDifficulty);
+    int aiNumber = ai.play(rounds, currentChoice.toString(), oddCount, evenCount, playerWin);
+    rounds++;
+
     // checks if the input is odd or even and counts it
     if (Utils.isOdd(intInput)) {
       oddCount++;
     } else if (Utils.isEven(intInput)) {
       evenCount++;
     }
-
-    // creates an instance of an AI
-    ai = Factory.createAi(currentDifficulty);
-    int aiNumber = ai.play(rounds, currentChoice.toString(), oddCount, evenCount, playerWin);
-    rounds++;
 
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", String.valueOf(aiNumber));
 
@@ -111,9 +111,7 @@ public class Game {
     if (currentChoice == Choice.EVEN) {
       if (Utils.isEven(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
-        if (currentDifficulty == Difficulty.HARD) {
-          playerWin = true;
-        }
+        playerWin = true;
         playerWinCount++;
 
       } else {
@@ -124,9 +122,7 @@ public class Game {
     } else {
       if (Utils.isOdd(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
-        if (currentDifficulty == Difficulty.HARD) {
-          playerWin = true;
-        }
+        playerWin = true;
         playerWinCount++;
 
       } else {

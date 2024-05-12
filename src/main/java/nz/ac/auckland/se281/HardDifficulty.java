@@ -5,14 +5,18 @@ public class HardDifficulty implements ArtificialIntelligence {
 
   private Strategy topStrategy;
   private Strategy randomStrategy;
+  private Strategy strategy;
 
   public HardDifficulty() {
     this.topStrategy = new TopStrategy();
     this.randomStrategy = new RandomStrategy();
+    strategy = new RandomStrategy();
   }
 
   @Override
-  public void setStrategy(Strategy strategy) {}
+  public void setStrategy() {
+    this.strategy = new RandomStrategy();
+  }
 
   /**
    * This method is used to play the game.
@@ -26,21 +30,17 @@ public class HardDifficulty implements ArtificialIntelligence {
    */
   @Override
   public int play(int currentRound, String choice, int oddCount, int evenCount, boolean playerWin) {
-    int num;
-    // If the current round is less than 4 or the player has won, use the random strategy.
-    if (currentRound < 4 || playerWin) {
-      num = randomStrategy.getStrategy(choice, oddCount, evenCount);
-      // Otherwise, use the top strategy.
-    } else {
 
-      num = topStrategy.getStrategy(choice, oddCount, evenCount);
+    if (currentRound >= 4 && playerWin) {
+      if (this.strategy instanceof RandomStrategy) {
+        this.strategy = topStrategy;
+      } else if (this.strategy instanceof TopStrategy) {
+        this.strategy = randomStrategy;
+        oddCount = 0;
+        evenCount = 0;
+      }
     }
 
-    return num;
-  }
-
-  @Override
-  public Strategy changeStrategy() {
-    return null;
+    return this.strategy.getStrategy(choice, oddCount, evenCount);
   }
 }
