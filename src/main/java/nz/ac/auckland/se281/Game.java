@@ -113,8 +113,6 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
         if (currentDifficulty == Difficulty.HARD) {
           playerWin = true;
-          // otherStrategy = ai.changeStrategy();
-          // ai.setStrategy(otherStrategy);
         }
         playerWinCount++;
 
@@ -128,8 +126,6 @@ public class Game {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
         if (currentDifficulty == Difficulty.HARD) {
           playerWin = true;
-          // otherStrategy = ai.changeStrategy();
-          // ai.setStrategy(otherStrategy);
         }
         playerWinCount++;
 
@@ -147,6 +143,12 @@ public class Game {
       MessageCli.GAME_NOT_STARTED.printMessage();
       return;
     }
+
+    // prints the number of rounds won by the player and the AI
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        playerName, String.valueOf(playerWinCount), String.valueOf(aiWin));
+    MessageCli.PRINT_PLAYER_WINS.printMessage(
+        "HAL-9000", String.valueOf(aiWin), String.valueOf(playerWinCount));
 
     // prints the winner of the game
     if (playerWinCount > aiWin) {
