@@ -11,9 +11,9 @@ public class Game {
   private int rounds;
   private Difficulty currentDifficulty;
   private Choice currentChoice;
-  private AI ai = null;
-  private int oddCount = 0;
-  private int evenCount = 0;
+  private Ai ai = null;
+  private int oddCount;
+  private int evenCount;
   private Strategy otherStrategy = null;
   private int playerWin = 0;
   private int aiWin = 0;
@@ -46,6 +46,9 @@ public class Game {
 
     playerName = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
+
+    oddCount = 0;
+    evenCount = 0;
   }
 
   /** Plays a round of the game if the new game is created. */
@@ -90,7 +93,7 @@ public class Game {
       evenCount++;
     }
 
-    ai = AIFactory.createAI(currentDifficulty);
+    ai = AIFactory.createAi(currentDifficulty);
     int aiNumber = ai.play(rounds, currentChoice.toString(), oddCount, evenCount);
     rounds++;
 

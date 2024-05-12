@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-public class Hard implements AI {
+public class Hard implements Ai {
 
   private Strategy strategy;
   private Strategy topStrategy;
@@ -38,6 +38,5 @@ public class Hard implements AI {
     // } else
     //   return null;
     return randomStrategy;
-  
   }
 }

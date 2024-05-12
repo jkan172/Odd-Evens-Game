@@ -1,13 +1,9 @@
 package nz.ac.auckland.se281;
 
-public class Easy implements AI {
-  
-  private Strategy strategy;
+public class Easy implements Ai {
 
   @Override
-  public void setStrategy(Strategy strategy) {
-		this.strategy = strategy;
-	}
+  public void setStrategy(Strategy strategy) {}
 
   @Override
   public int play(int currentRound, String choice, int oddCount, int evenCount) {

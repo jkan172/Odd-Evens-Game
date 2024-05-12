@@ -1,9 +1,6 @@
 package nz.ac.auckland.se281;
 
-public class Medium implements AI {
-  private Strategy strategy;
-  // private int oddCount;
-  // private int evenCount;
+public class Medium implements Ai {
   private Strategy topStrategy;
   private Strategy randomStrategy;
 
@@ -13,9 +10,7 @@ public class Medium implements AI {
   }
 
   @Override
-  public void setStrategy(Strategy strategy) {
-    this.strategy = strategy;
-  }
+  public void setStrategy(Strategy strategy) {}
 
   @Override
   public int play(int currentRound, String choice, int oddCount, int evenCount) {
@@ -34,11 +29,6 @@ public class Medium implements AI {
 
   @Override
   public Strategy changeStrategy() {
-    // if (strategy instanceof TopStrategy)
-    //   return new RandomStrategy();
-    // else if (strategy instanceof RandomStrategy)
-    //   return new TopStrategy();
-    // else
-      return null;
+    return null;
   }
 }
