@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-public class Hard implements Ai {
+public class Hard implements ArtificialIntelligence {
 
   private Strategy strategy;
   private Strategy topStrategy;
@@ -17,9 +17,9 @@ public class Hard implements Ai {
   }
 
   @Override
-  public int play(int currentRound, String choice, int oddCount, int evenCount) {
+  public int play(int currentRound, String choice, int oddCount, int evenCount, boolean playerWin) {
     int num;
-    if (currentRound < 4 || strategy == randomStrategy) {
+    if (currentRound < 4 || playerWin) {
       num = randomStrategy.getStrategy(choice, oddCount, evenCount);
 
     } else {

@@ -11,14 +11,15 @@ public class Game {
   private int rounds;
   private Difficulty currentDifficulty;
   private Choice currentChoice;
-  private Ai ai = null;
+  private ArtificialIntelligence ai = null;
   private int oddCount;
   private int evenCount;
   private Strategy otherStrategy = null;
-  private int playerWin = 0;
+  private int playerWinCount = 0;
   private int aiWin = 0;
 
   private int intInput = -1;
+  boolean playerWin = false;
 
   /**
    * Starts a new game with the given difficulty, choice, and options.
@@ -94,7 +95,7 @@ public class Game {
     }
 
     ai = AIFactory.createAi(currentDifficulty);
-    int aiNumber = ai.play(rounds, currentChoice.toString(), oddCount, evenCount);
+    int aiNumber = ai.play(rounds, currentChoice.toString(), oddCount, evenCount, playerWin);
     rounds++;
 
     MessageCli.PRINT_INFO_HAND.printMessage("HAL-9000", String.valueOf(aiNumber));
@@ -107,27 +108,31 @@ public class Game {
       if (Utils.isEven(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
         if (currentDifficulty == Difficulty.HARD) {
-          otherStrategy = ai.changeStrategy();
-          ai.setStrategy(otherStrategy);
+          playerWin = true;
+          // otherStrategy = ai.changeStrategy();
+          // ai.setStrategy(otherStrategy);
         }
-        playerWin++;
+        playerWinCount++;
 
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", "HAL-9000");
         aiWin++;
+        playerWin = false;
       }
     } else {
       if (Utils.isOdd(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "ODD", playerName);
         if (currentDifficulty == Difficulty.HARD) {
-          otherStrategy = ai.changeStrategy();
-          ai.setStrategy(otherStrategy);
+          playerWin = true;
+          // otherStrategy = ai.changeStrategy();
+          // ai.setStrategy(otherStrategy);
         }
-        playerWin++;
+        playerWinCount++;
 
       } else {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", "HAL-9000");
         aiWin++;
+        playerWin = false;
       }
     }
   }
@@ -139,9 +144,9 @@ public class Game {
       return;
     }
 
-    if (playerWin > aiWin) {
+    if (playerWinCount > aiWin) {
       MessageCli.PRINT_END_GAME.printMessage(playerName);
-    } else if (playerWin < aiWin) {
+    } else if (playerWinCount < aiWin) {
       MessageCli.PRINT_END_GAME.printMessage("HAL-9000");
     } else {
       MessageCli.PRINT_END_GAME_TIE.printMessage();
@@ -158,8 +163,8 @@ public class Game {
     }
 
     MessageCli.PRINT_PLAYER_WINS.printMessage(
-        playerName, String.valueOf(playerWin), String.valueOf(aiWin));
+        playerName, String.valueOf(playerWinCount), String.valueOf(aiWin));
     MessageCli.PRINT_PLAYER_WINS.printMessage(
-        "HAL-9000", String.valueOf(aiWin), String.valueOf(playerWin));
+        "HAL-9000", String.valueOf(aiWin), String.valueOf(playerWinCount));
   }
 }

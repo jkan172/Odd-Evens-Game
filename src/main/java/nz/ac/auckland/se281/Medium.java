@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-public class Medium implements Ai {
+public class Medium implements ArtificialIntelligence {
   private Strategy topStrategy;
   private Strategy randomStrategy;
 
@@ -13,7 +13,7 @@ public class Medium implements Ai {
   public void setStrategy(Strategy strategy) {}
 
   @Override
-  public int play(int currentRound, String choice, int oddCount, int evenCount) {
+  public int play(int currentRound, String choice, int oddCount, int evenCount, boolean playerWin) {
 
     int num;
     if (currentRound < 4) {
