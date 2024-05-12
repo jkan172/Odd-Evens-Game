@@ -14,12 +14,11 @@ public class Game {
   private ArtificialIntelligence ai = null;
   private int oddCount;
   private int evenCount;
-  private Strategy otherStrategy = null;
   private int playerWinCount = 0;
   private int aiWin = 0;
 
   private int intInput = -1;
-  boolean playerWin = false;
+  private boolean playerWin = false;
 
   /**
    * Starts a new game with the given difficulty, choice, and options.
@@ -35,6 +34,7 @@ public class Game {
     this.currentDifficulty = difficulty;
     currentChoice = choice;
 
+    // Check if the difficulty and choice are valid
     if (difficulty != Difficulty.EASY
         && difficulty != Difficulty.MEDIUM
         && difficulty != Difficulty.HARD) {
@@ -66,6 +66,7 @@ public class Game {
     String[] inputArray = input.split(" ");
     boolean validInput = false;
 
+    // repeats to ask for input until the right number our of 0 to 5 is given
     while (!validInput) {
       boolean multipleInput = inputArray.length > 1;
       boolean isInteger = Utils.isInteger(input);
@@ -88,12 +89,14 @@ public class Game {
       }
     }
 
+    // checks if the input is odd or even and counts it
     if (Utils.isOdd(intInput)) {
       oddCount++;
     } else if (Utils.isEven(intInput)) {
       evenCount++;
     }
 
+    // creates an instance of an AI
     ai = AIFactory.createAi(currentDifficulty);
     int aiNumber = ai.play(rounds, currentChoice.toString(), oddCount, evenCount, playerWin);
     rounds++;
@@ -104,6 +107,7 @@ public class Game {
 
     int sum = aiNumber + Integer.parseInt(input);
 
+    // checks if the sum is odd or even and prints the outcome
     if (currentChoice == Choice.EVEN) {
       if (Utils.isEven(sum)) {
         MessageCli.PRINT_OUTCOME_ROUND.printMessage(String.valueOf(sum), "EVEN", playerName);
@@ -144,6 +148,7 @@ public class Game {
       return;
     }
 
+    // prints the winner of the game
     if (playerWinCount > aiWin) {
       MessageCli.PRINT_END_GAME.printMessage(playerName);
     } else if (playerWinCount < aiWin) {
@@ -162,6 +167,7 @@ public class Game {
       return;
     }
 
+    // prints the number of rounds won by the player and the AI
     MessageCli.PRINT_PLAYER_WINS.printMessage(
         playerName, String.valueOf(playerWinCount), String.valueOf(aiWin));
     MessageCli.PRINT_PLAYER_WINS.printMessage(
