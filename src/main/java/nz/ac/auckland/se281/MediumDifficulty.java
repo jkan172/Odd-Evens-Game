@@ -1,10 +1,11 @@
 package nz.ac.auckland.se281;
 
-public class Medium implements ArtificialIntelligence {
+/** This class represents the medium difficulty level of the AI. */
+public class MediumDifficulty implements ArtificialIntelligence {
   private Strategy topStrategy;
   private Strategy randomStrategy;
 
-  public Medium() {
+  public MediumDifficulty() {
     this.topStrategy = new TopStrategy();
     this.randomStrategy = new RandomStrategy();
   }
@@ -26,9 +27,10 @@ public class Medium implements ArtificialIntelligence {
   public int play(int currentRound, String choice, int oddCount, int evenCount, boolean playerWin) {
 
     int num;
+    // If the current round is less than 4, use the random strategy.
     if (currentRound < 4) {
       num = randomStrategy.getStrategy(choice, oddCount, evenCount);
-
+      // Otherwise, use the top strategy.
     } else {
 
       num = topStrategy.getStrategy(choice, oddCount, evenCount);

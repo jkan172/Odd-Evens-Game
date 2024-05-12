@@ -1,6 +1,7 @@
 package nz.ac.auckland.se281;
 
-public class Easy implements ArtificialIntelligence {
+/** This class represents an easy AI. */
+public class EasyDifficulty implements ArtificialIntelligence {
 
   @Override
   public void setStrategy(Strategy strategy) {}

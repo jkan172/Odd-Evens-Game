@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** This class represents a random strategy for the AI. */
 public class RandomStrategy implements Strategy {
 
   /**

@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+/** This class represents a top strategy for the AI. */
 public class TopStrategy implements Strategy {
 
   /**
@@ -18,17 +19,15 @@ public class TopStrategy implements Strategy {
     int newRandomNumber = Utils.getRandomNumberRange(0, 5);
 
     boolean playerPrefersOdd = oddCount > evenCount;
-
+    // If the player chooses ODD for choice this game
     if (choice.equals("ODD")) {
-
       if (playerPrefersOdd) {
         return randomOddNumber;
       } else {
         return randomEvenNumber;
       }
-
+      // If the player chooses EVEN for choice this game
     } else if (choice.equals("EVEN")) {
-
       if (playerPrefersOdd) {
         return randomEvenNumber;
       } else {

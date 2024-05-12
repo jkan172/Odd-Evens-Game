@@ -1,11 +1,12 @@
 package nz.ac.auckland.se281;
 
-public class Hard implements ArtificialIntelligence {
+/** This class represents the hard difficulty level of the AI. */
+public class HardDifficulty implements ArtificialIntelligence {
 
   private Strategy topStrategy;
   private Strategy randomStrategy;
 
-  public Hard() {
+  public HardDifficulty() {
     this.topStrategy = new TopStrategy();
     this.randomStrategy = new RandomStrategy();
   }
@@ -26,9 +27,10 @@ public class Hard implements ArtificialIntelligence {
   @Override
   public int play(int currentRound, String choice, int oddCount, int evenCount, boolean playerWin) {
     int num;
+    // If the current round is less than 4 or the player has won, use the random strategy.
     if (currentRound < 4 || playerWin) {
       num = randomStrategy.getStrategy(choice, oddCount, evenCount);
-
+      // Otherwise, use the top strategy.
     } else {
 
       num = topStrategy.getStrategy(choice, oddCount, evenCount);

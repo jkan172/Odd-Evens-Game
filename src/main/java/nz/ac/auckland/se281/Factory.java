@@ -8,15 +8,23 @@ import nz.ac.auckland.se281.Main.Difficulty;
  * @param difficulty The difficulty level of the AI.
  * @return An AI object based on the difficulty level.
  */
-public class AIFactory {
+public class Factory {
+
+  /**
+   * This method creates an AI object based on the difficulty level.
+   *
+   * @param difficulty The difficulty level of the AI.
+   * @return An AI object based on the difficulty level.
+   */
   public static ArtificialIntelligence createAi(Difficulty difficulty) {
+    // Create an AI object based on the difficulty level.
     switch (difficulty) {
       case EASY:
-        return new Easy();
+        return new EasyDifficulty();
       case MEDIUM:
-        return new Medium();
+        return new MediumDifficulty();
       case HARD:
-        return new Hard();
+        return new HardDifficulty();
       default:
         MessageCli.INVALID_DIFFICULTY.printMessage();
         System.exit(0);

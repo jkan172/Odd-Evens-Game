@@ -97,7 +97,7 @@ public class Game {
     }
 
     // creates an instance of an AI
-    ai = AIFactory.createAi(currentDifficulty);
+    ai = Factory.createAi(currentDifficulty);
     int aiNumber = ai.play(rounds, currentChoice.toString(), oddCount, evenCount, playerWin);
     rounds++;
 
