@@ -1,21 +1,19 @@
 package nz.ac.auckland.se281;
 
+import nz.ac.auckland.se281.Main.Choice;
+
 /** This class represents the hard difficulty level of the AI. */
 public class HardDifficulty implements ArtificialIntelligence {
 
-  private Strategy topStrategy;
-  private Strategy randomStrategy;
   private Strategy strategy;
 
   public HardDifficulty() {
-    this.topStrategy = new TopStrategy();
-    this.randomStrategy = new RandomStrategy();
     strategy = new RandomStrategy();
   }
 
   @Override
-  public void setStrategy() {
-    this.strategy = new RandomStrategy();
+  public void setStrategy(Strategy strategy) {
+    this.strategy = strategy;
   }
 
   /**
@@ -29,18 +27,16 @@ public class HardDifficulty implements ArtificialIntelligence {
    * @return a random number between 0 and 5
    */
   @Override
-  public int play(int currentRound, String choice, int oddCount, int evenCount, boolean playerWin) {
+  public int play(int currentRound, Choice choice, int oddCount, int evenCount, boolean playerWin) {
 
-    if (currentRound >= 4 && playerWin) {
+    if (currentRound > 3 && playerWin) {
       if (this.strategy instanceof RandomStrategy) {
-        this.strategy = topStrategy;
+        setStrategy(new TopStrategy());
       } else if (this.strategy instanceof TopStrategy) {
-        this.strategy = randomStrategy;
-        oddCount = 0;
-        evenCount = 0;
+        setStrategy(new RandomStrategy());
       }
     }
 
-    return this.strategy.getStrategy(choice, oddCount, evenCount);
+    return strategy.getStrategy(choice, oddCount, evenCount);
   }
 }

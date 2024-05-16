@@ -1,5 +1,7 @@
 package nz.ac.auckland.se281;
 
+import nz.ac.auckland.se281.Main.Choice;
+
 /** This class represents an easy AI. */
 public class EasyDifficulty implements ArtificialIntelligence {
 
@@ -7,8 +9,8 @@ public class EasyDifficulty implements ArtificialIntelligence {
 
   /** This method sets the strategy of the AI to random. */
   @Override
-  public void setStrategy() {
-    this.strategy = new RandomStrategy();
+  public void setStrategy(Strategy strategy) {
+    this.strategy = strategy;
   }
 
   /**
@@ -22,8 +24,8 @@ public class EasyDifficulty implements ArtificialIntelligence {
    * @return a random number between 0 and 5
    */
   @Override
-  public int play(int currentRound, String choice, int oddCount, int evenCount, boolean playerWin) {
-    setStrategy();
+  public int play(int currentRound, Choice choice, int oddCount, int evenCount, boolean playerWin) {
+    setStrategy(new RandomStrategy());
     int num = this.strategy.getStrategy(choice, 0, 0);
     return num;
   }

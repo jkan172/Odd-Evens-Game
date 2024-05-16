@@ -1,5 +1,7 @@
 package nz.ac.auckland.se281;
 
+import nz.ac.auckland.se281.Main.Choice;
+
 /** This class represents a random strategy for the AI. */
 public class RandomStrategy implements Strategy {
 
@@ -12,7 +14,7 @@ public class RandomStrategy implements Strategy {
    * @return A random number between 0 and 5.
    */
   @Override
-  public int getStrategy(String choice, int oddCount, int evenCount) {
+  public int getStrategy(Choice choice, int oddCount, int evenCount) {
     int randomNumber = Utils.getRandomNumberRange(0, 5);
     return randomNumber;
   }

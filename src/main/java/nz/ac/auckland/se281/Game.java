@@ -11,7 +11,7 @@ public class Game {
   private int rounds;
   private Difficulty currentDifficulty;
   private Choice currentChoice;
-  private ArtificialIntelligence ai = null;
+  private ArtificialIntelligence ai;
   private int oddCount;
   private int evenCount;
   private int playerWinCount = 0;
@@ -47,6 +47,9 @@ public class Game {
 
     playerName = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
+    
+    // creates an instance of an AI
+    ai = Factory.createAi(currentDifficulty);
 
     oddCount = 0;
     evenCount = 0;
@@ -89,9 +92,7 @@ public class Game {
       }
     }
 
-    // creates an instance of an AI
-    ai = Factory.createAi(currentDifficulty);
-    int aiNumber = ai.play(rounds, currentChoice.toString(), oddCount, evenCount, playerWin);
+    int aiNumber = ai.play(rounds, currentChoice, oddCount, evenCount, playerWin);
     rounds++;
 
     // checks if the input is odd or even and counts it

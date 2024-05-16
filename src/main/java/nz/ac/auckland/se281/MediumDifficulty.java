@@ -1,17 +1,15 @@
 package nz.ac.auckland.se281;
 
+import nz.ac.auckland.se281.Main.Choice;
+
 /** This class represents the medium difficulty level of the AI. */
 public class MediumDifficulty implements ArtificialIntelligence {
-  private Strategy topStrategy;
   private Strategy strategy;
 
-  public MediumDifficulty() {
-    this.topStrategy = new TopStrategy();
-    strategy = new RandomStrategy();
-  }
-
   @Override
-  public void setStrategy() {}
+  public void setStrategy(Strategy strategy) {
+    this.strategy = strategy;
+  }
 
   /**
    * This method is used to play the game.
@@ -24,21 +22,14 @@ public class MediumDifficulty implements ArtificialIntelligence {
    * @return a random number between 0 and 5
    */
   @Override
-  public int play(int currentRound, String choice, int oddCount, int evenCount, boolean playerWin) {
+  public int play(int currentRound, Choice choice, int oddCount, int evenCount, boolean playerWin) {
 
-    int num = strategy.getStrategy(choice, oddCount, evenCount);
-    // If the current round is less than 4, use the random strategy.
-    // if (currentRound < 4) {
-    //   num = randomStrategy.getStrategy(choice, oddCount, evenCount);
-    //   // Otherwise, use the top strategy.
-    // } else {
-
-    //   num = topStrategy.getStrategy(choice, oddCount, evenCount);
-    // }
     if (currentRound > 3) {
-      num = topStrategy.getStrategy(choice, oddCount, evenCount);
+      setStrategy(new TopStrategy());
+      return strategy.getStrategy(choice, oddCount, evenCount);
+    } else {
+      setStrategy(new RandomStrategy());
+      return strategy.getStrategy(choice, oddCount, evenCount);
     }
-
-    return num;
   }
 }
