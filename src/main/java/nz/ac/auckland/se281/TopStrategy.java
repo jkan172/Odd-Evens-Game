@@ -26,25 +26,19 @@ public class TopStrategy implements Strategy {
     if (choice == Choice.ODD) {
       if (playerPrefersOdd) {
         return randomOddNumber;
-        // return 1;
       } else if (playerPreferBoth) {
         return newRandomNumber;
-        // return 3;
       } else {
         return randomEvenNumber;
-        // return 2;
       }
       // If the player chooses EVEN for choice this game
     } else {
       if (playerPrefersOdd) {
         return randomEvenNumber;
-        // return 2;
       } else if (playerPreferBoth) {
         return newRandomNumber;
-        // return 3;
       } else {
         return randomOddNumber;
-        // return 1;
       }
     }
   }
