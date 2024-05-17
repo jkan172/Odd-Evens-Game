@@ -14,8 +14,8 @@ public class Game {
   private ArtificialIntelligence ai;
   private int oddCount;
   private int evenCount;
-  private int playerWinCount = 0;
-  private int aiWin = 0;
+  private int playerWinCount;
+  private int aiWin;
 
   private int intInput = -1;
   private boolean playerWin = false;
@@ -47,12 +47,14 @@ public class Game {
 
     playerName = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(playerName);
-    
+
     // creates an instance of an AI
     ai = Factory.createAi(currentDifficulty);
 
     oddCount = 0;
     evenCount = 0;
+    playerWinCount = 0;
+    aiWin = 0;
   }
 
   /** Plays a round of the game if the new game is created. */
