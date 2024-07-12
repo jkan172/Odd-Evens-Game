@@ -10,6 +10,8 @@ Odd and Evens game is a simple game.
 
 This Odd Evens Game is designed to have a human player playing against an artificial intelligence (AI) called HAL-9000. This is a game of chance but also a game of psychology. The AI will try to learn the behaviour of the human player and attempt to guess the player's next move.
 
+The Odd Evens game is a terminal-driven interface design. This means that the system will be controlled by a menu system that will be displayed on the terminal. The menu will allow the user to select from a list of commands. The user will be able to select a command by typing its code and any arguments it expects. Some commands require additional options, which are prompted by the system one at a time. The system will then execute the appropriate action. This was Programmed with Java.
+
 
 To run:
 1. Download all files
